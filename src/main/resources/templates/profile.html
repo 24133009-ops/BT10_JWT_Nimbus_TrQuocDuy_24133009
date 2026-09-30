@@ -122,10 +122,10 @@
                             </span>
 
                             <div class="d-flex justify-content-center gap-2 my-3">
-                                <button id="load-all-users" class="btn btn-primary btn-sm">
+                                <button id="load-all-users" type="button" class="btn btn-primary btn-sm px-3 shadow-sm">
                                     <i class="fa-solid fa-users me-1"></i>Tải danh sách tất cả Users (/users/)
                                 </button>
-                                <a href="/login" class="btn btn-outline-secondary btn-sm">
+                                <a href="/login" class="btn btn-outline-secondary btn-sm px-3">
                                     <i class="fa-solid fa-arrow-left me-1"></i>Về trang Login
                                 </a>
                             </div>
@@ -145,10 +145,13 @@
                         </div>
                     </div>
 
-                    <!-- Danh sách tất cả Users (ẩn ban đầu, hiện khi bấm nút) -->
+                    <!-- Danh sách tất cả Users dạng Card Inline -->
                     <div id="users-list-card" class="card border-0 shadow-sm rounded-4 mb-4" style="display: none;">
-                        <div class="card-header bg-white py-3 fw-bold">
-                            <i class="fa-solid fa-list-check me-2 text-primary"></i>Danh sách người dùng hệ thống (GET /users/)
+                        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold text-primary">
+                                <i class="fa-solid fa-users-gear me-2"></i>Danh sách người dùng hệ thống (GET /users/)
+                            </span>
+                            <span id="users-count-badge" class="badge bg-primary rounded-pill">0 người dùng</span>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
@@ -160,11 +163,60 @@
                                             <th>Họ & Tên</th>
                                             <th>Email</th>
                                             <th>Ngày tạo</th>
+                                            <th>Trạng thái</th>
                                         </tr>
                                     </thead>
                                     <tbody id="users-table-body">
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MODAL POPUP HIỂN THỊ DANH SÁCH USERS TRỰC TIẾP TRÊN MÀN HÌNH -->
+                    <div class="modal fade" id="usersModal" tabindex="-1" aria-labelledby="usersModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content rounded-4 border-0 shadow-lg">
+                                <div class="modal-header bg-primary text-white rounded-top-4">
+                                    <h5 class="modal-title fw-bold" id="usersModalLabel">
+                                        <i class="fa-solid fa-users me-2"></i>Danh Sách Người Dùng Hệ Thống (/users/)
+                                    </h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body p-0">
+                                    <div class="p-3 bg-light border-bottom d-flex justify-content-between align-items-center">
+                                        <span class="small text-muted">
+                                            <i class="fa-solid fa-shield-halved me-1 text-success"></i>Dữ liệu được bảo vệ và xác thực qua <strong>Nimbus JOSE + JWT Bearer Token</strong>
+                                        </span>
+                                        <span id="modal-users-count" class="badge bg-success rounded-pill px-3 py-2">Đang tải...</span>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover align-middle mb-0">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th class="ps-3">#</th>
+                                                    <th>ID</th>
+                                                    <th>Họ & Tên</th>
+                                                    <th>Email</th>
+                                                    <th>Ngày tham gia</th>
+                                                    <th class="pe-3">Trạng thái</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="modal-users-tbody">
+                                                <tr>
+                                                    <td colspan="6" class="text-center py-4 text-muted">
+                                                        <span class="spinner-border spinner-border-sm text-primary me-2"></span>Đang tải danh sách người dùng...
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer bg-light rounded-bottom-4 py-2">
+                                    <button type="button" class="btn btn-secondary btn-sm rounded-3" data-bs-dismiss="modal">
+                                        <i class="fa-solid fa-xmark me-1"></i>Đóng
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

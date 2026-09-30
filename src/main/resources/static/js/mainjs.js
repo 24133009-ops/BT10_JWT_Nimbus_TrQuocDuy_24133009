@@ -149,36 +149,95 @@ $(document).ready(function() {
         });
     });
 
-    // Tải danh sách tất cả người dùng (API /users/)
-    $('#load-all-users').click(function() {
+    // Tải danh sách tất cả người dùng (API /users/ được bảo vệ bằng JWT)
+    $('#load-all-users').click(function(e) {
+        if (e) e.preventDefault();
+
+        if (!localStorage.token) {
+            alert("Bạn chưa đăng nhập! Vui lòng đăng nhập lại.");
+            window.location.href = "/login";
+            return;
+        }
+
+        // 1. Mở Modal hiển thị trạng thái đang tải
+        var usersModalElem = document.getElementById('usersModal');
+        var usersModal = bootstrap.Modal.getOrCreateInstance(usersModalElem);
+        usersModal.show();
+
+        var btn = $('#load-all-users');
+        var originalBtnText = btn.html();
+        btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-1"></span> Đang tải...');
+
+        $('#modal-users-tbody').html(
+            '<tr><td colspan="6" class="text-center py-4 text-muted">' +
+            '<span class="spinner-border spinner-border-sm text-primary me-2"></span>Đang truy vấn API /users/ với Nimbus JWT Bearer Token...' +
+            '</td></tr>'
+        );
+        $('#modal-users-count').text('Đang tải...');
+
         $.ajax({
             type: 'GET',
             url: '/users/',
             dataType: 'json',
             contentType: "application/json; charset=utf-8",
             beforeSend: function(xhr) {
-                if (localStorage.token) {
-                    xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
-                }
+                xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.token);
             },
             success: function(data) {
-                var tbody = $('#users-table-body');
-                tbody.empty();
-                data.forEach(function(u, idx) {
-                    tbody.append(
-                        '<tr>' +
-                        '<td>' + (idx + 1) + '</td>' +
-                        '<td>' + u.id + '</td>' +
-                        '<td>' + u.fullName + '</td>' +
-                        '<td>' + u.email + '</td>' +
-                        '<td>' + (u.createdAt ? new Date(u.createdAt).toLocaleString() : 'N/A') + '</td>' +
-                        '</tr>'
-                    );
-                });
-                $('#users-list-card').show();
+                btn.prop('disabled', false).html(originalBtnText);
+
+                var modalTbody = $('#modal-users-tbody');
+                var inlineTbody = $('#users-table-body');
+                modalTbody.empty();
+                inlineTbody.empty();
+
+                var countText = data.length + ' người dùng';
+                $('#users-count-badge').text(countText);
+                $('#modal-users-count').text(countText);
+
+                if (!data || data.length === 0) {
+                    var emptyRow = '<tr><td colspan="6" class="text-center py-3 text-muted">Chưa có người dùng nào.</td></tr>';
+                    modalTbody.append(emptyRow);
+                    inlineTbody.append(emptyRow);
+                } else {
+                    data.forEach(function(u, idx) {
+                        var dateStr = u.createdAt ? new Date(u.createdAt).toLocaleString('vi-VN') : 'Vừa xong';
+                        var badgeHtml = '<span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-1"><i class="fa-solid fa-check me-1"></i>Hoạt động</span>';
+                        
+                        var rowHtml = 
+                            '<tr>' +
+                            '<td class="ps-3 fw-bold text-secondary">' + (idx + 1) + '</td>' +
+                            '<td><span class="badge bg-secondary-subtle text-secondary font-monospace">#' + u.id + '</span></td>' +
+                            '<td class="fw-semibold text-dark"><i class="fa-regular fa-circle-user me-2 text-primary"></i>' + (u.fullName || 'N/A') + '</td>' +
+                            '<td><span class="font-monospace text-primary">' + u.email + '</span></td>' +
+                            '<td class="text-muted small">' + dateStr + '</td>' +
+                            '<td class="pe-3">' + badgeHtml + '</td>' +
+                            '</tr>';
+
+                        modalTbody.append(rowHtml);
+                        inlineTbody.append(rowHtml);
+                    });
+                }
+
+                // Hiển thị thêm card inline bên dưới và cuộn mượt
+                $('#users-list-card').slideDown(300);
             },
-            error: function() {
-                alert("Không thể tải danh sách người dùng.");
+            error: function(xhr) {
+                btn.prop('disabled', false).html(originalBtnText);
+                var errorText = "Lỗi khi tải danh sách người dùng.";
+                try {
+                    var errObj = JSON.parse(xhr.responseText);
+                    if (errObj.detail) errorText += " Chi tiết: " + errObj.detail;
+                    if (errObj.description) errorText += " (" + errObj.description + ")";
+                } catch (e) {}
+
+                $('#modal-users-tbody').html(
+                    '<tr><td colspan="6" class="text-center py-4 text-danger">' +
+                    '<i class="fa-solid fa-triangle-exclamation me-2"></i>' + errorText +
+                    '</td></tr>'
+                );
+                $('#modal-users-count').text('Lỗi kết nối');
+                alert(errorText);
             }
         });
     });
