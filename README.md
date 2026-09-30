@@ -183,31 +183,7 @@ security.jwt.expiration-time=3600000
 ```
 
 ---
-
-## 6. HƯỚNG DẪN CÀI ĐẶT VÀ CHẠY DỰ ÁN
-
-### Bước 1: Yêu cầu môi trường
-* Java SDK 17 LTS trở lên
-* Maven 3.8+ (hoặc dùng trực tiếp `mvnw.cmd` có sẵn trong thư mục)
-* Microsoft SQL Server hoặc MySQL
-
-### Bước 2: Chạy kiểm thử tự động (Unit Test)
-Kiểm tra toàn bộ 8 bài test (bao gồm 7 test case kiểm thử Nimbus JOSE + JWT):
-```powershell
-./mvnw clean test
-```
-*Kết quả:* `Tests run: 8, Failures: 0, Errors: 0, Skipped: 0` -> **BUILD SUCCESS**
-
-### Bước 3: Khởi chạy ứng dụng
-Chạy ứng dụng bằng lệnh:
-```powershell
-./mvnw spring-boot:run
-```
-Ứng dụng sẽ khởi động thành công trên cổng: **`http://localhost:8005`**
-
----
-
-## 7. HƯỚNG DẪN KIỂM THỬ API & GIAO DIỆN (TESTING GUIDE)
+## 6. HƯỚNG DẪN KIỂM THỬ API & GIAO DIỆN (TESTING GUIDE)
 
 ### Cách 1: Kiểm thử trên Giao diện Web (Thymeleaf & AJAX)
 1. Mở trình duyệt truy cập: `http://localhost:8005/login`
@@ -287,34 +263,3 @@ curl -X GET http://localhost:8005/users/me \
 *Response: Trả về ProblemDetail 401 Unauthorized / Invalid Signature theo đúng Slide 30, 31.*
 
 ---
-
-## 8. HƯỚNG DẪN TẠO VÀ ĐẨY LÊN GITHUB RỒI NỘP LINK UTEXLMS
-
-### Bước 1: Khởi tạo Git và Commit
-Tại thư mục gốc dự án (`c:\Bài 10`), mở Terminal / PowerShell và thực hiện:
-```bash
-git init
-git add .
-git commit -m "feat: hoàn thành bài tập JWT Spring Boot 3 Security 6 sử dụng Nimbus JOSE + JWT thay thế JJWT"
-```
-
-### Bước 2: Tạo Repository trên GitHub
-1. Truy cập vào GitHub: [https://github.com/new](https://github.com/new)
-2. Đặt tên Repository, ví dụ: `SpringBoot3-Security6-Nimbus-JWT` hoặc `Bai10-JWT-Nimbus`
-3. Chọn chế độ: **Public**
-4. Không chọn thêm README hay .gitignore (vì dự án đã có sẵn).
-5. Nhấn **Create repository**.
-
-### Bước 3: Đẩy mã nguồn lên GitHub
-Liên kết remote và đẩy code lên:
-```bash
-git branch -M main
-git remote add origin https://github.com/<tai-khoan-github-cua-ban>/SpringBoot3-Security6-Nimbus-JWT.git
-git push -u origin main
-```
-
-### Bước 4: Nộp link lên hệ thống UTExLMS
-1. Đăng nhập vào trang đào tạo trực tuyến: [https://utexlms.hcmute.edu.vn](https://utexlms.hcmute.edu.vn)
-2. Chọn khóa học **Lập trình Web (WEBPR330479)** của ThS. Nguyễn Hữu Trung.
-3. Tìm đến mục nộp bài tập về **JSON Web Token (JWT)**.
-4. Dán link GitHub Repository của bạn vào ô nộp bài và nhấn **Lưu / Nộp bài**.
