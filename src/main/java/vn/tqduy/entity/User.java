@@ -29,12 +29,14 @@ public class User implements UserDetails, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @org.hibernate.annotations.Nationalized
     @Column(nullable = false, columnDefinition = "nvarchar(50)")
     private String fullName;
 
     @Column(unique = true, length = 100, nullable = false)
     private String email;
 
+    @org.hibernate.annotations.Nationalized
     @Column(columnDefinition = "nvarchar(500)", nullable = true)
     private String images;
 
