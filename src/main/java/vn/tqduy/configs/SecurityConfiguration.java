@@ -1,4 +1,4 @@
-package vn.iotstar.configs;
+package vn.tqduy.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import vn.iotstar.filter.JwtAuthenticationFilter;
+import vn.tqduy.filter.JwtAuthenticationFilter;
 
 import java.util.List;
 

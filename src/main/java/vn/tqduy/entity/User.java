@@ -1,4 +1,4 @@
-package vn.iotstar.entity;
+package vn.tqduy.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

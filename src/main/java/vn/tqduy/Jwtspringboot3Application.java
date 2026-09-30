@@ -1,4 +1,4 @@
-package vn.iotstar;
+package vn.tqduy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,13 +1,13 @@
-package vn.iotstar.services;
+package vn.tqduy.services;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import vn.iotstar.entity.User;
-import vn.iotstar.models.LoginUserModel;
-import vn.iotstar.models.RegisterUserModel;
-import vn.iotstar.repository.UserRepository;
+import vn.tqduy.entity.User;
+import vn.tqduy.models.LoginUserModel;
+import vn.tqduy.models.RegisterUserModel;
+import vn.tqduy.repository.UserRepository;
 
 @Service
 public class AuthenticationService {

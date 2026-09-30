@@ -1,4 +1,4 @@
-package vn.iotstar;
+package vn.tqduy;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.util.ReflectionTestUtils;
-import vn.iotstar.services.JwtService;
+import vn.tqduy.services.JwtService;
 
 import java.util.Collections;
 import java.util.Date;

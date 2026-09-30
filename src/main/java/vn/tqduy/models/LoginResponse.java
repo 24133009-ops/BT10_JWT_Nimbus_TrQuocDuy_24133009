@@ -1,4 +1,4 @@
-package vn.iotstar.models;
+package vn.tqduy.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

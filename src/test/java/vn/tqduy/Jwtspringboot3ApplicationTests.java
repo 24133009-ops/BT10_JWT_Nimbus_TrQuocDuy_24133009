@@ -1,4 +1,4 @@
-package vn.iotstar;
+package vn.tqduy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

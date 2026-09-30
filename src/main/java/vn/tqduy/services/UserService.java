@@ -1,8 +1,8 @@
-package vn.iotstar.services;
+package vn.tqduy.services;
 
 import org.springframework.stereotype.Service;
-import vn.iotstar.entity.User;
-import vn.iotstar.repository.UserRepository;
+import vn.tqduy.entity.User;
+import vn.tqduy.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;

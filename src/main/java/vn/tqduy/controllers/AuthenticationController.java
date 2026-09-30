@@ -1,4 +1,4 @@
-package vn.iotstar.controllers;
+package vn.tqduy.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vn.iotstar.entity.User;
-import vn.iotstar.models.LoginResponse;
-import vn.iotstar.models.LoginUserModel;
-import vn.iotstar.models.RegisterUserModel;
-import vn.iotstar.services.AuthenticationService;
-import vn.iotstar.services.JwtService;
+import vn.tqduy.entity.User;
+import vn.tqduy.models.LoginResponse;
+import vn.tqduy.models.LoginUserModel;
+import vn.tqduy.models.RegisterUserModel;
+import vn.tqduy.services.AuthenticationService;
+import vn.tqduy.services.JwtService;
 
 @RequestMapping("/auth")
 @RestController

@@ -1,4 +1,4 @@
-package vn.iotstar.services;
+package vn.tqduy.services;
 
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JOSEObjectType;

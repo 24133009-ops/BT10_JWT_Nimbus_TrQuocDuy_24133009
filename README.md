@@ -1,4 +1,4 @@
-# BÀI TẬP VÍ DỤ JWT VỚI SPRING BOOT 3 & SPRING SECURITY 6
+﻿# BÀI TẬP VÍ DỤ JWT VỚI SPRING BOOT 3 & SPRING SECURITY 6
 ## SỬ DỤNG THƯ VIỆN NIMBUS JOSE + JWT THAY THẾ JJWT
 
 ---
@@ -49,7 +49,7 @@ Bài 10/
 ├── mvnw & mvnw.cmd                       # Maven Wrapper hỗ trợ chạy dự án ngay lập tức
 ├── src/
 │   ├── main/
-│   │   ├── java/vn/iotstar/
+│   │   ├── java/vn/tqduy/
 │   │   │   ├── Jwtspringboot3Application.java    # Class khởi chạy Spring Boot
 │   │   │   ├── configs/
 │   │   │   │   ├── ApplicationConfiguration.java # Beans: PasswordEncoder, UserDetailsService, AuthProvider
@@ -83,7 +83,7 @@ Bài 10/
 │   │           ├── login.html                    # Giao diện Đăng nhập / Đăng ký hiện đại
 │   │           └── profile.html                  # Giao diện xem thông tin cá nhân qua AJAX
 │   └── test/
-│       ├── java/vn/iotstar/
+│       ├── java/vn/tqduy/
 │       │   ├── JwtServiceNimbusTest.java         # 7 Unit Tests kiểm thử toàn diện Nimbus JOSE
 │       │   └── Jwtspringboot3ApplicationTests.java # Kiểm thử Spring Boot Context
 │       └── resources/

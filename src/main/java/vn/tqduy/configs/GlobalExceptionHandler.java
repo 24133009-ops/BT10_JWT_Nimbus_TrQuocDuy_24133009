@@ -1,4 +1,4 @@
-package vn.iotstar.configs;
+package vn.tqduy.configs;
 
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;

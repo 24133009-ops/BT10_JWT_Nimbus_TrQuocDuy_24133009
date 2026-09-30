@@ -1,4 +1,4 @@
-package vn.iotstar.controllers;
+package vn.tqduy.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

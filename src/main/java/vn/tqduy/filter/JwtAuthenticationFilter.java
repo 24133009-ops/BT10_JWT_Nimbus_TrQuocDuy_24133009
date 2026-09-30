@@ -1,4 +1,4 @@
-package vn.iotstar.filter;
+package vn.tqduy.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-import vn.iotstar.services.JwtService;
+import vn.tqduy.services.JwtService;
 
 import java.io.IOException;
 

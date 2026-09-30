@@ -1,4 +1,4 @@
-package vn.iotstar.models;
+package vn.tqduy.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LoginUserModel {
+public class RegisterUserModel {
     private String email;
     private String password;
+    private String fullName;
 }
