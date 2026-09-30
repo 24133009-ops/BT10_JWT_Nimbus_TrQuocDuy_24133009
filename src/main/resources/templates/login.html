@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Đăng nhập & Đăng ký - Nimbus JWT Authentication</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            color: #1e293b;
+        }
+
+        .auth-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border-radius: 1.25rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+            width: 100%;
+            max-width: 480px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .auth-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 2rem 1.75rem 1.5rem;
+            text-align: center;
+        }
+
+        .auth-header h3 {
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .auth-header p {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+
+        .badge-nimbus {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 0.75rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 50rem;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .auth-body {
+            padding: 1.75rem;
+        }
+
+        .nav-pills .nav-link {
+            border-radius: 0.75rem;
+            color: #64748b;
+            font-weight: 600;
+            padding: 0.6rem 1.25rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-pills .nav-link.active {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+        }
+
+        .form-floating > label {
+            color: #64748b;
+        }
+
+        .form-control:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.15);
+        }
+
+        .btn-auth {
+            background: var(--primary-gradient);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            border: none;
+            width: 100%;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .btn-auth:hover {
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.35);
+        }
+
+        .btn-auth:active {
+            transform: translateY(0);
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.775rem;
+            color: #94a3b8;
+            margin-top: 1.25rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-card">
+        <div class="auth-header">
+            <h3><i class="fa-solid fa-shield-halved me-2"></i>JWT Security Demo</h3>
+            <p>Spring Boot 3 &bull; Spring Security 6 &bull; Nimbus JOSE+JWT</p>
+            <span class="badge-nimbus"><i class="fa-solid fa-code me-1"></i>Thay thế JJWT bằng Nimbus JOSE + JWT</span>
+        </div>
+
+        <div class="auth-body">
+            <!-- Tabs Chuyển Đổi Đăng Nhập / Đăng Ký -->
+            <ul class="nav nav-pills nav-fill mb-4" id="authTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="login-tab" data-bs-toggle="pill" data-bs-target="#login-pane" type="button" role="tab">
+                        <i class="fa-solid fa-right-to-bracket me-1"></i>Đăng nhập
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="register-tab" data-bs-toggle="pill" data-bs-target="#register-pane" type="button" role="tab">
+                        <i class="fa-solid fa-user-plus me-1"></i>Đăng ký
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="authTabsContent">
+                <!-- FORM ĐĂNG NHẬP (Chính thức theo Slide 32) -->
+                <div class="tab-pane fade show active" id="login-pane" role="tabpanel">
+                    <form id="login-form" onsubmit="return false;">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required value="trungnh@hcmute.edu.vn">
+                            <label for="email"><i class="fa-regular fa-envelope me-1"></i>Email</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required autocomplete="current-password" value="123456">
+                            <label for="password"><i class="fa-solid fa-lock me-1"></i>Mật khẩu</label>
+                        </div>
+
+                        <button id="login" type="button" class="btn-auth mt-2">
+                            <i class="fa-solid fa-arrow-right-to-bracket me-1"></i>Đăng nhập (Login)
+                        </button>
+                    </form>
+                </div>
+
+                <!-- FORM ĐĂNG KÝ HỖ TRỢ TEST -->
+                <div class="tab-pane fade" id="register-pane" role="tabpanel">
+                    <form id="signup-form" onsubmit="return false;">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="reg-fullname" placeholder="Họ và tên" required value="Nguyễn Hữu Trung">
+                            <label for="reg-fullname"><i class="fa-regular fa-user me-1"></i>Họ và tên</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="reg-email" placeholder="name@example.com" required value="trungnh@hcmute.edu.vn">
+                            <label for="reg-email"><i class="fa-regular fa-envelope me-1"></i>Email</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="reg-password" placeholder="Mật khẩu" required autocomplete="new-password" value="123456">
+                            <label for="reg-password"><i class="fa-solid fa-key me-1"></i>Mật khẩu</label>
+                        </div>
+
+                        <button id="signup-btn" type="button" class="btn-auth mt-2">
+                            <i class="fa-solid fa-user-check me-1"></i>Đăng ký tài khoản
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-note">
+                Sinh viên: <strong>Trương Quốc Duy</strong> &bull; MSSV: <strong>24133009</strong><br>
+                Khoa CNTT - ĐH Sư Phạm Kỹ Thuật TP.HCM (HCMUTE)
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script th:src="@{/js/mainjs.js}" src="/js/mainjs.js"></script>
+</body>
+</html>
